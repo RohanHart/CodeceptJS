@@ -303,13 +303,35 @@ declare namespace CodeceptJS {
     wait(sec: number): void;
     waitForFunction(fn: Function, argsOrSec?: string, sec?: number): void;
   }
-
-  export function actor<
-    T extends {
-      [action: string]: (this: I, ...args: any[]) => void;
-    }
-    >(customSteps?: T): I & T;
 }
+
+/**
+ * Unfortunately TS is not smart enough to infer the types correctly so this must be used like so:
+ *
+ * import 'codeceptjs';
+ * import { I as BaseI } from 'codeceptjs/puppeteer';
+ *
+ * const loginAdmin = function(this: BaseI) {
+ *   this.amOnPage('/login');
+ *   // more code
+ * };
+ *
+ * export const I = actor<BaseI, {
+ *     loginAdmin: typeof loginAdmin;
+ *   }>({
+ *     // Define custom steps here, use 'this' to access default methods of I.
+ *     loginAdmin,
+ *   });
+*/
+
+type CustomAction<B extends CodeceptJS.I> = (this: B, ...args: any[]) => void;
+
+declare function actor<
+  B extends CodeceptJS.I,
+  T extends {
+    [action: string]: CustomAction<B>
+  }
+  >(customSteps?: T): B & T;
 
 declare module 'codeceptjs' {
   export = CodeceptJS;
@@ -398,11 +420,6 @@ declare namespace CodeceptJSPuppeteer {
     waitUrlEquals(urlPart: string, sec?: number): void;
   }
 
-  export function actor<
-    T extends {
-      [action: string]: (this: I, ...args: any[]) => void;
-    }
-    >(customSteps?: T): I & T;
 }
 
 declare module 'codeceptjs/puppeteer' {
