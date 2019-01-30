@@ -211,11 +211,11 @@ declare function session(
 ): Promise<any>;
 declare function pause(): void;
 
-declare namespace CodeceptJS {
-  export function Given(given: string, action: (...data: string[]) => void): void;
-  export function When(when: string, action: (...data: string[]) => void): void;
-  export function Then(then: string, action: (...data: string[]) => void): void;
+declare function Given(given: string, action: (...data: string[]) => void): void;
+declare function When(when: string, action: (...data: string[]) => void): void;
+declare function Then(then: string, action: (...data: string[]) => void): void;
 
+declare namespace CodeceptJS {
   export interface I {
     appendField(field: ILocator, value: string): void;
     appendField(field: string, value: string): void;
