@@ -30,6 +30,7 @@ interface ILocator {
   android?: string;
   ios?: string;
 }
+type LocatorDef = ILocator | string;
 
 declare class Helper {
   /** Abstract method to provide required config options */
@@ -141,59 +142,36 @@ declare function Then(then: string, action: (...data: string[]) => void): void;
 
 declare namespace CodeceptJS {
   export interface I {
-    appendField(field: ILocator, value: string): void;
-    appendField(field: string, value: string): void;
-    attachFile(locator: ILocator, pathToFile: string): void;
-    attachFile(locator: string, pathToFile: string): void;
-    checkOption(field: ILocator, context?: ILocator): void;
-    checkOption(field: ILocator, context?: string): void;
-    checkOption(field: string, context?: ILocator): void;
-    checkOption(field: string, context?: string): void;
-    clearField(field: ILocator): void;
-    clearField(field: string): void;
-    click(locator: ILocator, context?: ILocator): void;
-    click(locator: ILocator, context?: string): void;
-    click(locator: string, context?: ILocator): void;
-    click(locator: string, context?: string): void;
+    appendField(field: LocatorDef, value: string): void;
+    attachFile(locator: LocatorDef, pathToFile: string): void;
+    checkOption(field: LocatorDef, context?: LocatorDef): void;
+    clearField(field: LocatorDef): void;
+    click(locator: LocatorDef, context?: LocatorDef): void;
     debug(msg: string): void;
     debugSection(section: string, msg: string): void;
-    dontSee(text: string, context?: ILocator): void;
-    dontSee(text: string, context?: string): void;
-    dontSeeCheckboxIsChecked(field: ILocator): void;
-    dontSeeCheckboxIsChecked(field: string): void;
+    dontSee(text: string, context?: LocatorDef): void;
+    dontSeeCheckboxIsChecked(field: LocatorDef): void;
     dontSeeCookie(name: string): void;
     dontSeeCurrentUrlEquals(url: string): void;
-    dontSeeElement(locator: ILocator): void;
-    dontSeeElement(locator: string): void;
-    dontSeeElementInDOM(locator: ILocator): void;
-    dontSeeElementInDOM(locator: string): void;
+    dontSeeElement(locator: LocatorDef): void;
+    dontSeeElementInDOM(locator: LocatorDef): void;
     dontSeeInCurrentUrl(url: string): void;
-    dontSeeInField(field: ILocator, value: string): void;
-    dontSeeInField(field: string, value: string): void;
+    dontSeeInField(field: LocatorDef, value: string): void;
     dontSeeInSource(text: string): void;
     dontSeeInTitle(text: string): void;
-    doubleClick(locator: ILocator, context?: ILocator): void;
-    doubleClick(locator: ILocator, context?: string): void;
-    doubleClick(locator: string, context?: ILocator): void;
-    doubleClick(locator: string, context?: string): void;
+    doubleClick(locator: LocatorDef, context?: LocatorDef): void;
     executeAsyncScript(fn: Function): void;
     executeScript(fn: Function): void;
-    fillField(field: ILocator, value: string): void;
-    fillField(field: string, value: string): void;
-    grabAttributeFrom(locator: ILocator, attr: string): Promise<string>;
-    grabAttributeFrom(locator: string, attr: string): Promise<string>;
+    fillField(field: LocatorDef, value: string): void;
+    grabAttributeFrom(locator: LocatorDef, attr: string): Promise<string>;
     grabCookie(name: string): Promise<string>;
     grabCurrentUrl(): Promise<string>;
-    grabNumberOfVisibleElements(locator: ILocator): Promise<string>;
-    grabNumberOfVisibleElements(locator: string): Promise<string>;
+    grabNumberOfVisibleElements(locator: LocatorDef): Promise<string>;
     grabPageScrollPosition(): Promise<string>;
-    grabTextFrom(locator: ILocator): Promise<string>;
-    grabTextFrom(locator: string): Promise<string>;
+    grabTextFrom(locator: LocatorDef): Promise<string>;
     grabTitle(): Promise<string>;
-    grabValueFrom(locator: ILocator): Promise<string>;
-    grabValueFrom(locator: string): Promise<string>;
-    moveCursorTo(locator: ILocator, offsetX?: number, offsetY?: number): void;
-    moveCursorTo(locator: string, offsetX?: number, offsetY?: number): void;
+    grabValueFrom(locator: LocatorDef): Promise<string>;
+    moveCursorTo(locator: LocatorDef, offsetX?: number, offsetY?: number): void;
     pressKey(key: string): void;
     refreshPage(): void;
     resizeWindow(width: number, height: number): void;
@@ -201,28 +179,20 @@ declare namespace CodeceptJS {
     say: () => any;
     scrollPageToBottom(): void;
     scrollPageToTop(): void;
-    scrollTo(locator: ILocator, offsetX?: number, offsetY?: number): void;
-    scrollTo(locator: string, offsetX?: number, offsetY?: number): void;
-    see(text: string, context?: ILocator): void;
-    see(text: string, context?: string): void;
-    seeCheckboxIsChecked(field: ILocator): void;
-    seeCheckboxIsChecked(field: string): void;
+    scrollTo(locator: LocatorDef, offsetX?: number, offsetY?: number): void;
+    see(text: string, context?: LocatorDef): void;
+    seeCheckboxIsChecked(field: LocatorDef): void;
     seeCookie(name: string): void;
     seeCurrentUrlEquals(url: string): void;
-    seeElement(locator: ILocator): void;
-    seeElement(locator: string): void;
-    seeElementInDOM(locator: ILocator): void;
-    seeElementInDOM(locator: string): void;
+    seeElement(locator: LocatorDef): void;
+    seeElementInDOM(locator: LocatorDef): void;
     seeInCurrentUrl(url: string): void;
-    seeInField(field: ILocator, value: string): void;
-    seeInField(field: string, value: string): void;
+    seeInField(field: LocatorDef, value: string): void;
     seeInSource(text: string): void;
     seeInTitle(text: string): void;
     seeNumberOfElements(selector: string, num: number): void;
-    seeNumberOfVisibleElements(locator: ILocator, num: number): void;
-    seeNumberOfVisibleElements(locator: string, num: number): void;
-    selectOption(select: ILocator, option: string): void;
-    selectOption(select: string, option: string): void;
+    seeNumberOfVisibleElements(locator: LocatorDef, num: number): void;
+    selectOption(select: LocatorDef, option: string): void;
     setCookie(cookie: string): void;
     wait(sec: number): void;
     waitForFunction(fn: Function, argsOrSec?: string, sec?: number): void;
@@ -235,78 +205,44 @@ declare namespace CodeceptJS {
     amOnPage(url: string): void;
     cancelPopup(): void;
     clearCookie(name: string): void;
-    clickLink(locator: ILocator, context?: ILocator): void;
-    clickLink(locator: ILocator, context?: string): void;
-    clickLink(locator: string, context?: ILocator): void;
-    clickLink(locator: string, context?: string): void;
+    clickLink(locator: LocatorDef, context?: LocatorDef): void;
     closeCurrentTab(): void;
     closeOtherTabs(): void;
     dragAndDrop(srcElement: string, destElement: string): void;
-    dragSlider(locator: ILocator, offsetX?: number): void;
-    dragSlider(locator: string, offsetX?: number): void;
+    dragSlider(locator: LocatorDef, offsetX?: number): void;
     grabBrowserLogs(): Promise<string>;
-    grabCssPropertyFrom(
-      locator: ILocator,
-      cssProperty: string
-    ): Promise<string>;
-    grabCssPropertyFrom(locator: string, cssProperty: string): Promise<string>;
-    grabHTMLFrom(locator: ILocator): Promise<string>;
-    grabHTMLFrom(locator: string): Promise<string>;
+    grabCssPropertyFrom(locator: LocatorDef, cssProperty: string): Promise<string>;
+    grabHTMLFrom(locator: LocatorDef): Promise<string>;
     grabNumberOfOpenTabs(): Promise<string>;
     grabPopupText(): Promise<string>;
     grabSource(): Promise<string>;
     haveRequestHeaders(customHeaders: string): void;
     openNewTab(): void;
-    rightClick(locator: ILocator, context?: ILocator): void;
-    rightClick(locator: ILocator, context?: string): void;
-    rightClick(locator: string, context?: ILocator): void;
-    rightClick(locator: string, context?: string): void;
+    rightClick(locator: LocatorDef, context?: LocatorDef): void;
     saveScreenshot(fileName: string, fullPage: string): void;
-    seeAttributesOnElements(locator: ILocator, attributes: string): void;
-    seeAttributesOnElements(locator: string, attributes: string): void;
-    seeCssPropertiesOnElements(locator: ILocator, cssProperties: string): void;
-    seeCssPropertiesOnElements(locator: string, cssProperties: string): void;
+    seeAttributesOnElements(locator: LocatorDef, attributes: string): void;
+    seeCssPropertiesOnElements(locator: LocatorDef, cssProperties: string): void;
     seeInPopup(text: string): void;
-    seeTextEquals(text: string, context?: ILocator): void;
-    seeTextEquals(text: string, context?: string): void;
+    seeTextEquals(text: string, context?: LocatorDef): void;
     seeTitleEquals(text: string): void;
-    switchTo(locator: ILocator): void;
-    switchTo(locator: string): void;
+    switchTo(locator: LocatorDef): void;
     switchToNextTab(num?: number): void;
     switchToPreviousTab(num?: number): void;
-    waitForDetached(locator: ILocator, sec: number): void;
-    waitForDetached(locator: string, sec: number): void;
-    waitForElement(locator: ILocator, sec?: number): void;
-    waitForElement(locator: string, sec?: number): void;
-    waitForEnabled(locator: ILocator, sec: number): void;
-    waitForEnabled(locator: string, sec: number): void;
-    waitForInvisible(locator: ILocator, sec: number): void;
-    waitForInvisible(locator: string, sec: number): void;
+    waitForDetached(locator: LocatorDef, sec: number): void;
+    waitForElement(locator: LocatorDef, sec?: number): void;
+    waitForEnabled(locator: LocatorDef, sec: number): void;
+    waitForInvisible(locator: LocatorDef, sec: number): void;
     waitForNavigation(opts?: string): void;
     waitForRequest(urlOrPredicate: string, sec?: number): void;
     waitForResponse(urlOrPredicate: string, sec?: number): void;
-    waitForText(text: string, sec?: number, context?: ILocator): void;
-    waitForText(text: string, sec?: number, context?: string): void;
-    waitForValue(field: ILocator, value: string, sec: number): void;
-    waitForValue(field: string, value: string, sec: number): void;
-    waitForVisible(locator: ILocator, sec: number): void;
-    waitForVisible(locator: string, sec: number): void;
+    waitForText(text: string, sec?: number, context?: LocatorDef): void;
+    waitForValue(field: LocatorDef, value: string, sec: number): void;
+    waitForVisible(locator: LocatorDef, sec: number): void;
     waitInUrl(urlPart: string, sec?: number): void;
-    waitNumberOfVisibleElements(
-      locator: string,
-      num: number,
-      sec: number
-    ): void;
-    waitNumberOfVisibleElements(
-      locator: ILocator,
-      num: number,
-      sec: number
-    ): void;
-    waitToHide(locator: ILocator, sec: number): void;
-    waitToHide(locator: string, sec: number): void;
+    waitNumberOfVisibleElements(locator: LocatorDef, num: number, sec: number): void;
+    waitToHide(locator: LocatorDef, sec: number): void;
     waitUntil(fn: Function, sec?: number): void;
-    waitUntilExists(locator: ILocator, sec: number): void;
-    waitUntilExists(locator: string, sec: number): void;
+    waitUntilExists(locator: LocatorDef, sec: number): void;
     waitUrlEquals(urlPart: string, sec?: number): void;
   }
 }
