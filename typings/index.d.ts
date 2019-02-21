@@ -175,8 +175,6 @@ declare namespace CodeceptJS {
     pressKey(key: string): void;
     refreshPage(): void;
     resizeWindow(width: number, height: number): void;
-    retryStep(opts: string): void;
-    say: () => any;
     scrollPageToBottom(): void;
     scrollPageToTop(): void;
     scrollTo(locator: LocatorDef, offsetX?: number, offsetY?: number): void;
@@ -196,6 +194,11 @@ declare namespace CodeceptJS {
     setCookie(cookie: string): void;
     wait(sec: number): void;
     waitForFunction(fn: Function, argsOrSec?: string, sec?: number): void;
+  }
+
+  interface ActorAdditional {
+    retryStep(opts: string): void;
+    say: () => any;
   }
 
   export interface PuppeteerI extends I {
@@ -251,29 +254,29 @@ declare namespace CodeceptJS {
  * Unfortunately TS is not smart enough to infer the types correctly so this must be used like so:
  *
  * import 'codeceptjs';
- * import { I as BaseI } from 'codeceptjs/puppeteer';
+ * import { PuppeteerI as BaseI } from 'codeceptjs';
  *
+ * // Define custom steps using 'this' to access default methods of I.
  * const loginAdmin = function(this: BaseI) {
  *   this.amOnPage('/login');
  *   // more code
  * };
  *
  * export const I = actor<BaseI, {
+ *     // one line for each custom step's type
  *     loginAdmin: typeof loginAdmin;
  *   }>({
- *     // Define custom steps here, use 'this' to access default methods of I.
+ *     // one line for each custom step
  *     loginAdmin,
  *   });
 */
+declare function actor<
+    B extends CodeceptJS.I,
+    T extends { [action: string]: CustomAction<B> }
+  >
+  (customSteps?: T): B & T & CodeceptJS.ActorAdditional;
 
 type CustomAction<B extends CodeceptJS.I> = (this: B, ...args: any[]) => void;
-
-declare function actor<
-  B extends CodeceptJS.I,
-  T extends {
-    [action: string]: CustomAction<B>
-  }
-  >(customSteps?: T): B & T;
 
 declare module 'codeceptjs' {
   export = CodeceptJS;
