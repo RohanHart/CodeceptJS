@@ -175,6 +175,7 @@ declare namespace CodeceptJS {
     pressKey(key: string): void;
     refreshPage(): void;
     resizeWindow(width: number, height: number): void;
+    saveScreenshot(fileName: string, fullPage?: boolean): void;
     scrollPageToBottom(): void;
     scrollPageToTop(): void;
     scrollTo(locator: LocatorDef, offsetX?: number, offsetY?: number): void;
@@ -222,7 +223,6 @@ declare namespace CodeceptJS {
     haveRequestHeaders(customHeaders: string): void;
     openNewTab(): void;
     rightClick(locator: LocatorDef, context?: LocatorDef): void;
-    saveScreenshot(fileName: string, fullPage: string): void;
     seeAttributesOnElements(locator: LocatorDef, attributes: string): void;
     seeCssPropertiesOnElements(locator: LocatorDef, cssProperties: string): void;
     seeInPopup(text: string): void;
@@ -274,7 +274,6 @@ declare namespace CodeceptJS {
     rightClick(locator: ILocator, context?: string): void;
     rightClick(locator: string, context?: ILocator): void;
     rightClick(locator: string, context?: string): void;
-    saveScreenshot(fileName: string, fullPage?: string): void;
     seeAttributesOnElements(locator: ILocator, attributes: string): void;
     seeAttributesOnElements(locator: string, attributes: string): void;
     seeCssPropertiesOnElements(locator: ILocator, cssProperties: string): void;
