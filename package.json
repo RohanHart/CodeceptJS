@@ -84,7 +84,7 @@
     "rosie": "^1.6.0",
     "sinon": "^1.17.2",
     "sinon-chai": "^2.14.0",
-    "typescript": "^2.9.2",
+    "typescript": "^3.3.3333",
     "unirest": "^0.5.1",
     "webdriverio": "^5.2.8",
     "xmldom": "^0.1.27",
