@@ -248,6 +248,67 @@ declare namespace CodeceptJS {
     waitUntilExists(locator: LocatorDef, sec: number): void;
     waitUrlEquals(urlPart: string, sec?: number): void;
   }
+
+  export interface ProtractorI extends I {
+    amInsideAngularApp(): void;
+    amOnPage(url: string): void;
+    amOutsideAngularApp(): void;
+    clearCookie(cookie?: string): void;
+    closeCurrentTab(): void;
+    closeOtherTabs(): void;
+    dragAndDrop(srcElement: string, destElement: string): void;
+    grabBrowserLogs(): Promise<string>;
+    grabCssPropertyFrom(locator: ILocator, cssProperty: string): Promise<string>;
+    grabCssPropertyFrom(locator: string, cssProperty: string): Promise<string>;
+    grabHTMLFrom(locator: ILocator): Promise<string>;
+    grabHTMLFrom(locator: string): Promise<string>;
+    grabNumberOfOpenTabs(): Promise<string>;
+    grabSource(): Promise<string>;
+    haveModule(modName: string, fn: Function): void;
+    moveTo(path: string): void;
+    refresh(): void;
+    refreshPage(): void;
+    resetModule(modName: string): void;
+    resizeWindow(width: number, height: number): void;
+    rightClick(locator: ILocator, context?: ILocator): void;
+    rightClick(locator: ILocator, context?: string): void;
+    rightClick(locator: string, context?: ILocator): void;
+    rightClick(locator: string, context?: string): void;
+    saveScreenshot(fileName: string, fullPage?: string): void;
+    seeAttributesOnElements(locator: ILocator, attributes: string): void;
+    seeAttributesOnElements(locator: string, attributes: string): void;
+    seeCssPropertiesOnElements(locator: ILocator, cssProperties: string): void;
+    seeCssPropertiesOnElements(locator: string, cssProperties: string): void;
+    seeInCurrentUrl(url: string): void;
+    seeInPopup(text: string): void;
+    seeTextEquals(text: string, context?: ILocator): void;
+    seeTextEquals(text: string, context?: string): void;
+    seeTitleEquals(text: string): void;
+    setCookie(cookie: string): void;
+    switchTo(locator: ILocator): void;
+    switchTo(locator: string): void;
+    waitForClickable(locator: ILocator, sec?: number): void;
+    waitForClickable(locator: string, sec?: number): void;
+    waitForDetached(locator: ILocator, sec?: number): void;
+    waitForDetached(locator: string, sec?: number): void;
+    waitForEnabled(locator: ILocator, sec?: number): void;
+    waitForEnabled(locator: string, sec?: number): void;
+    waitForInvisible(locator: ILocator, sec?: number): void;
+    waitForInvisible(locator: string, sec?: number): void;
+    waitForStalenessOf(locator: ILocator, sec?: number): void;
+    waitForStalenessOf(locator: string, sec?: number): void;
+    waitForText(text: string, sec?: number, context?: ILocator): void;
+    waitForText(text: string, sec?: number, context?: string): void;
+    waitForVisible(locator: ILocator, sec?: number): void;
+    waitForVisible(locator: string, sec?: number): void;
+    waitNumberOfVisibleElements(locator: ILocator, num: number, sec?: number): void;
+    waitNumberOfVisibleElements(locator: string, num: number, sec?: number): void;
+    waitToHide(locator: ILocator, sec?: number): void;
+    waitToHide(locator: string, sec?: number): void;
+    waitUntil(fn: Function, sec?: number, timeoutMsg?: string): void;
+    waitUntilExists(locator: ILocator, sec?: number): void;
+    waitUntilExists(locator: string, sec?: number): void;
+  }
 }
 
 /**
