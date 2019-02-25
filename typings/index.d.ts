@@ -156,14 +156,13 @@ declare namespace CodeceptJS {
     grabCurrentUrl(): Promise<string>;
     grabNumberOfVisibleElements(locator: LocatorDef): Promise<string>;
     grabPageScrollPosition(): Promise<string>;
-    grabTextFrom(locator: LocatorDef): Promise<string>;
+    grabTextFrom(locator: LocatorDef): Promise<string> | Array<Promise<string>>;
     grabTitle(): Promise<string>;
     grabValueFrom(locator: LocatorDef): Promise<string>;
     moveCursorTo(locator: LocatorDef, offsetX?: number, offsetY?: number): void;
     pressKey(key: string): void;
     refreshPage(): void;
     resizeWindow(width: number, height: number): void;
-    saveScreenshot(fileName: string, fullPage?: boolean): void;
     scrollPageToBottom(): void;
     scrollPageToTop(): void;
     scrollTo(locator: LocatorDef, offsetX?: number, offsetY?: number): void;
@@ -187,7 +186,7 @@ declare namespace CodeceptJS {
 
   interface ActorAdditional {
     retryStep(opts: string): void;
-    say: () => any;
+    say(): any;
   }
 
   export interface PuppeteerI extends I {
@@ -211,6 +210,7 @@ declare namespace CodeceptJS {
     haveRequestHeaders(customHeaders: string): void;
     openNewTab(): void;
     rightClick(locator: LocatorDef, context?: LocatorDef): void;
+    saveScreenshot(fileName: string, fullPage: string): void;
     seeAttributesOnElements(locator: LocatorDef, attributes: string): void;
     seeCssPropertiesOnElements(locator: LocatorDef, cssProperties: string): void;
     seeInPopup(text: string): void;
@@ -224,8 +224,8 @@ declare namespace CodeceptJS {
     waitForEnabled(locator: LocatorDef, sec: number): void;
     waitForInvisible(locator: LocatorDef, sec: number): void;
     waitForNavigation(opts?: string): void;
-    waitForRequest(urlOrPredicate: string, sec?: number): void;
-    waitForResponse(urlOrPredicate: string, sec?: number): void;
+    waitForRequest(urlOrPredicate: string | ((req: any) => boolean), sec?: number): void;
+    waitForResponse(urlOrPredicate: string | ((req: any) => boolean), sec?: number): void;
     waitForText(text: string, sec?: number, context?: LocatorDef): void;
     waitForValue(field: LocatorDef, value: string, sec: number): void;
     waitForVisible(locator: LocatorDef, sec: number): void;
@@ -317,7 +317,7 @@ declare namespace CodeceptJS {
  *     // one line for each custom step
  *     loginAdmin,
  *   });
-*/
+ */
 declare function actor<
     B extends CodeceptJS.I,
     T extends { [action: string]: CustomAction<B> }
