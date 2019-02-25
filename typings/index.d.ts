@@ -118,22 +118,10 @@ declare function BeforeSuite(callback: ICodeceptCallback): void;
 declare function After(callback: ICodeceptCallback): void;
 declare function AfterSuite(callback: ICodeceptCallback): void;
 
-declare function locate(selector: string): Locator;
-declare function locate(selector: ILocator): Locator;
-declare function within(selector: string, callback: Function): Promise<any>;
-declare function within(selector: ILocator, callback: Function): Promise<any>;
-declare function session(selector: string, callback: Function): Promise<any>;
-declare function session(selector: ILocator, callback: Function): Promise<any>;
-declare function session(
-  selector: string,
-  config: any,
-  callback: Function
-): Promise<any>;
-declare function session(
-  selector: ILocator,
-  config: any,
-  callback: Function
-): Promise<any>;
+declare function locate(selector: LocatorDef): Locator;
+declare function within(selector: LocatorDef, callback: Function): Promise<any>;
+declare function session(selector: LocatorDef, callback: Function): Promise<any>;
+declare function session(selector: LocatorDef, config: any, callback: Function): Promise<any>;
 declare function pause(): void;
 
 declare function Given(given: string, action: (...data: string[]) => void): void;
